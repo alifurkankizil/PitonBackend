@@ -13,6 +13,8 @@ using Microsoft.Extensions.Logging;
 
 using AutoMapper;
 using Api.Services;
+using Api.Context;
+using Microsoft.EntityFrameworkCore;
 
 namespace Api
 {
@@ -43,6 +45,11 @@ namespace Api
 
             #region Register Service
             services.AddScoped<IWorkService, WorkService>();
+            #endregion
+
+            #region Database 
+            services.AddDbContext<ApiContext>(options =>
+            options.UseSqlServer(Configuration.GetConnectionString("ApiDbSetting")));
             #endregion
 
         }

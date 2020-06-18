@@ -23,7 +23,7 @@ namespace Api.Controllers
         }
 
 
-        [HttpPost]
+        [HttpPost("add")]
         public async Task<IActionResult> Add(WorkDTO model)
         {
             var result = await _workService.Add(model);

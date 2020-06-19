@@ -8,11 +8,11 @@ namespace Api.Models.DTO
 {
     public class WorkDTO
     {
-        [Required]
+        [Required(ErrorMessage ="Başlık bilgisi giriniz!")]
         public string Title { get; set; }
-        [Required]
+        [Required(ErrorMessage ="Açıklama giriniz!")]
         public string Description { get; set; }
-        [Required]
-        public DateTime Date { get; set; }
+        [Required(ErrorMessage ="Tarih giriniz!")]
+        public DateTime? Date { get; set; }
     }
 }

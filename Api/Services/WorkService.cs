@@ -98,7 +98,7 @@ namespace Api.Services
         public async Task<List<Work>> GetAll(DateTime date, WorkPeriod period)
         {
 
-            date= Convert.ToDateTime(DateTime.Now.ToShortDateString());
+            date = Convert.ToDateTime(date.ToShortDateString());
 
             DateTime startDate = date, endDate = date;
 

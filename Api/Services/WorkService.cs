@@ -54,10 +54,10 @@ namespace Api.Services
             switch (state)
             {
                 case CompleteState.Start:
-                    if (work.CompleteState != CompleteState.New || work.CompleteState != CompleteState.Stop)
+                    if (work.CompleteState != CompleteState.New || work.CompleteState != CompleteState.Pause)
                         return false;
                     break;
-                case CompleteState.Stop:
+                case CompleteState.Pause:
                     if (work.CompleteState != CompleteState.Start)
                         return false;
                     break;
@@ -92,6 +92,9 @@ namespace Api.Services
 
         public async Task<List<Work>> GetAll(DateTime date, WorkPeriod period)
         {
+
+            date= Convert.ToDateTime(DateTime.Now.ToShortDateString());
+
             DateTime startDate = date, endDate = date;
 
             switch (period)

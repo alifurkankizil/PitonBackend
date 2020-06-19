@@ -34,7 +34,9 @@ namespace Api.Services
             _mapper = mapper;
         }
 
-
+        /// <summary>
+        /// Yeni bir görev ekler
+        /// </summary>
         public async Task<bool> Add(WorkDTO model)
         {
             var work = _mapper.Map<Work>(model);
@@ -44,6 +46,9 @@ namespace Api.Services
             return await _context.SaveChangesAsync() > 0;
         }
 
+        /// <summary>
+        /// Görevin durumunu değiştirir
+        /// </summary>
         public async Task<bool> ChangeState(Guid id, CompleteState state)
         {
             var work = await _context.Works.SingleOrDefaultAsync(x => x.WorkId == id);
@@ -70,6 +75,9 @@ namespace Api.Services
             return await _context.SaveChangesAsync() > 0;
         }
 
+        /// <summary>
+        /// GGrevi siler
+        /// </summary>
         public async Task<bool> Delete(Guid id)
         {
             var work = await _context.Works.SingleOrDefaultAsync(x => x.WorkId == id);
@@ -82,6 +90,9 @@ namespace Api.Services
             return await _context.SaveChangesAsync() > 0;
         }
 
+        /// <summary>
+        /// Görevi döndürür
+        /// </summary>
         public async Task<WorkDTO> Get(Guid id) =>
              _mapper.Map<WorkDTO>(
                 await _context
@@ -90,6 +101,9 @@ namespace Api.Services
                        .SingleOrDefaultAsync(x => x.WorkId == id)
                 );
 
+        /// <summary>
+        /// Görev listesini döndürür
+        /// </summary>
         public async Task<List<Work>> GetAll(DateTime date, WorkPeriod period)
         {
 
@@ -123,6 +137,9 @@ namespace Api.Services
                                  .ToListAsync();
         }
 
+        /// <summary>
+        /// Görevi günceller
+        /// </summary>
         public async Task<bool> Update(Guid id, WorkDTO model)
         {
             var work = await _context.Works.SingleOrDefaultAsync(x => x.WorkId == id);

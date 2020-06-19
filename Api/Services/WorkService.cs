@@ -51,26 +51,17 @@ namespace Api.Services
         /// </summary>
         public async Task<bool> ChangeState(Guid id, CompleteState state)
         {
-            var work = await _context.Works.SingleOrDefaultAsync(x => x.WorkId == id);
-
-            if (work == null || work.CompleteState == state)
+            //Durumu değiştirilen görev "Yeni" değerine atanamaz
+            if (state == CompleteState.New)
                 return false;
 
-            switch (state)
-            {
-                case CompleteState.Start:
-                    if (work.CompleteState != CompleteState.New || work.CompleteState != CompleteState.Pause)
-                        return false;
-                    break;
-                case CompleteState.Pause:
-                    if (work.CompleteState != CompleteState.Start)
-                        return false;
-                    break;
-                default:
-                    break;
-            }
+            var work = await _context.Works.SingleOrDefaultAsync(x => x.WorkId == id);
 
-            work.CompleteState = state;
+            //Mevcut durum gelen ile aynı veya mevcut durumu bitmiş iken değiştirme yapılamaz
+            if (work == null || work.CompleteState == CompleteState.Finish || work.CompleteState == state )
+                return false;
+
+            work.CompleteState = (CompleteState)state;
 
             return await _context.SaveChangesAsync() > 0;
         }

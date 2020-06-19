@@ -9,7 +9,7 @@ namespace Api.Models.Enum
     {
         New=0,
         Start=1,
-        Stop=2,
+        Pause=2,
         Finish=3
     }
 }

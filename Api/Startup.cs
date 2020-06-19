@@ -60,7 +60,7 @@ namespace Api
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { 
-                    Title = "Piton Backend",
+                    Title = "Piton Backend v1",
                     Contact=new OpenApiContact()
                     {
                         Email="alifurkankizil@gmail.com",

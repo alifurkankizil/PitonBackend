@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers
 {
-    [Route("work")]
+    [Route("Work")]
     [ApiController]
     public class WorkController : ControllerBase
     {
@@ -22,8 +22,10 @@ namespace Api.Controllers
             _workService = workService;
         }
 
-
-        [HttpPost("add")]
+        /// <summary>
+        /// Yeni bir görev ekler
+        /// </summary>
+        [HttpPost("Add")]
         public async Task<IActionResult> Add(WorkDTO model)
         {
             var result = await _workService.Add(model);
@@ -34,7 +36,10 @@ namespace Api.Controllers
                 return BadRequest();
         }
 
-        [HttpPut("update")]
+        /// <summary>
+        /// Görevi günceller
+        /// </summary>
+        [HttpPut("Update")]
         public async Task<IActionResult> Update([FromQuery] Guid id, [FromBody] WorkDTO model)
         {
             var result = await _workService.Update(id, model);
@@ -45,7 +50,10 @@ namespace Api.Controllers
                 return NotFound();
         }
 
-        [HttpPut("change")]
+        /// <summary>
+        /// Görevin durumunu değiştirir
+        /// </summary>
+        [HttpPut("ChangeState")]
         public async Task<IActionResult> ChangeState([FromQuery] Guid id, [FromBody] CompleteState state)
         {
             var result = await _workService.ChangeState(id, state);
@@ -56,7 +64,10 @@ namespace Api.Controllers
                 return BadRequest();
         }
 
-        [HttpDelete("delete")]
+        /// <summary>
+        /// GGrevi siler
+        /// </summary>
+        [HttpDelete("Delete")]
         public async Task<IActionResult> Delete(Guid id)
         {
             var result = await _workService.Delete(id);
@@ -67,7 +78,10 @@ namespace Api.Controllers
                 return NotFound();
         }
 
-        [HttpGet("get")]
+        /// <summary>
+        /// Görevi döndürür
+        /// </summary>
+        [HttpGet("GetById")]
         public async Task<IActionResult> Get(Guid id)
         {
             var result = await _workService.Get(id);
@@ -78,7 +92,10 @@ namespace Api.Controllers
                 return NotFound();
         }
 
-        [HttpGet("all")]
+        /// <summary>
+        /// Görev listesini döndürür
+        /// </summary>
+        [HttpGet("GetAllPeriod")]
         public async Task<IActionResult> GetAll([FromBody]DateTime date, [FromQuery] WorkPeriod period)
         {
             var result = await _workService.GetAll(date, period);

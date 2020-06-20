@@ -26,7 +26,7 @@ namespace Api.Controllers
         /// Yeni bir görev ekler
         /// </summary>
         [HttpPost("Add")]
-        public async Task<IActionResult> Add(WorkDTO model)
+        public async Task<IActionResult> Add([FromBody] WorkDTO model)
         {
             var result = await _workService.Add(model);
 
@@ -68,7 +68,7 @@ namespace Api.Controllers
         /// GGrevi siler
         /// </summary>
         [HttpDelete("Delete")]
-        public async Task<IActionResult> Delete(Guid id)
+        public async Task<IActionResult> Delete([FromQuery] Guid id)
         {
             var result = await _workService.Delete(id);
 
@@ -82,7 +82,7 @@ namespace Api.Controllers
         /// Görevi döndürür
         /// </summary>
         [HttpGet("GetById")]
-        public async Task<IActionResult> Get(Guid id)
+        public async Task<IActionResult> Get([FromQuery] Guid id)
         {
             var result = await _workService.Get(id);
 
@@ -93,14 +93,14 @@ namespace Api.Controllers
         }
 
         /// <summary>
-        /// Görev listesini döndürür
+        /// Periyota uygun görev listesini döndürür
         /// </summary>
-        [HttpGet("GetAllPeriod")]
+        [HttpGet("GetByPeriod")]
         public async Task<IActionResult> GetAll([FromBody]DateTime date, [FromQuery] WorkPeriod period)
         {
             var result = await _workService.GetAll(date, period);
 
-            if (result != null)
+            if (result != null && result.Count > 0)
                 return Ok(result);
             else
                 return NotFound();

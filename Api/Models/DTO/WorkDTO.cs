@@ -10,8 +10,10 @@ namespace Api.Models.DTO
     {
         [Required(ErrorMessage ="Başlık bilgisi giriniz!")]
         public string Title { get; set; }
+
         [Required(ErrorMessage ="Açıklama giriniz!")]
         public string Description { get; set; }
+
         [Required(ErrorMessage ="Tarih giriniz!")]
         public DateTime? Date { get; set; }
     }

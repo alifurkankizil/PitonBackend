@@ -51,6 +51,10 @@ namespace Api.Services
         /// </summary>
         public async Task<bool> ChangeState(Guid id, CompleteState state)
         {
+            //Enum tanımlı mı?
+            if (!Enum.IsDefined(typeof(CompleteState), state))
+                return false;
+
             //Durumu değiştirilen görev "Yeni" değerine atanamaz
             if (state == CompleteState.New)
                 return false;
@@ -62,6 +66,7 @@ namespace Api.Services
                 return false;
 
             work.CompleteState = (CompleteState)state;
+
 
             return await _context.SaveChangesAsync() > 0;
         }
